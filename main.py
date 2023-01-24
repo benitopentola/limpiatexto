@@ -14,9 +14,10 @@ def copy_to_clipboard():
 
 def remove_line_spaces():
         text = input_text.get("1.0", "end") # obtiene el texto del cuadro de entrada
-        text = text.strip() # quita los espacios en blanco al principio y al final de cada línea
-        text = text.replace("\n ", "\n")
-        text = text.replace(" \n", "\n")
+        lines = text.splitlines()
+        for i in range(len(lines)):
+            lines[i] = lines[i].strip()
+        text = "\n".join(lines)
         output_text.delete("1.0", "end") # elimina cualquier texto existente en el cuadro de salida
         output_text.insert("1.0", text) # inserta el nuevo texto sin espacios al principio y final de cada línea
 
@@ -44,6 +45,6 @@ remove_spaces_button.pack()
 
 clear_button = tk.Button(root, text="Clear Text", command=clear_text)
 clear_button.pack()
-
+#
 root.mainloop()
 
